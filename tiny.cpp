@@ -58,6 +58,24 @@ void load_ini() {
 	}
 }
 
+void game_loop() {
+	SDL_Event keyevt;
+	bool running = true;
+	while (running) {
+		while(SDL_PollEvent(&keyevt)) {
+			if (keyevt.type == SDL_QUIT) {
+				std::cout << "got a quit event" << std::endl;
+				running = false;
+				break;
+			}
+			if (keyevt.type == SDL_KEYDOWN) {
+			}
+			if (keyevt.type == SDL_KEYUP) {
+			}
+		}
+	}
+}
+
 int main(int argc, char* argv[]) {
 	script_init();
 	load_ini();
@@ -65,6 +83,8 @@ int main(int argc, char* argv[]) {
 	vid_init();
 
 	dump_lua();
+
+	game_loop();
 	
 	engine_shutdown();
 	script_shutdown();
