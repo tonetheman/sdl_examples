@@ -5,6 +5,7 @@
 
 static SDL_Surface* screen = 0;
 static lua_State * lstate = 0;
+static TTF_Font* menu_font = 0;
 
 void dump_lua() {
 	std::cout << "lua_gettop: " <<  lua_gettop(lstate) << std::endl;
@@ -24,6 +25,11 @@ void engine_init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	if (TTF_Init()==-1) {
 		std::cout << "unable to init ttf" <<
+		std::endl;
+	}
+	menu_font = loadfont("data/visitor1.ttf",10);
+	if (menu_font==0) {
+		std::cout << "unable to load menu font" <<
 		std::endl;
 	}
 }
