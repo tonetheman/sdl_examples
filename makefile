@@ -1,5 +1,8 @@
 
-all: 1 2 load_image.o
+all: 1 2 load_image.o tiny
+
+tiny : tiny.cpp
+	g++ -o tiny tiny.cpp `sdl-config --libs` -llua5.1
 
 load_image.o : load_image.cpp
 	g++ -o load_image.o -c load_image.cpp
