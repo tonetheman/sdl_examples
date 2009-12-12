@@ -10,6 +10,16 @@ void dump_lua() {
 	std::cout << "lua_gettop: " <<  lua_gettop(lstate) << std::endl;
 }
 
+TTF_Font* loadfont(char * file, int ptsize) {
+	TTF_Font* tmpfont;
+	tmpfont = TTF_OpenFont(file,ptsize);
+	if (tmpfont==0) {
+		std::cout << "unable to open font " << file <<
+		std::endl;
+	}
+	return tmpfont;
+}
+
 void engine_init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	if (TTF_Init()==-1) {
