@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include <lua5.1/lua.hpp>
 #include <iostream>
 
@@ -11,6 +12,10 @@ void dump_lua() {
 
 void engine_init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	if (TTF_Init()==-1) {
+		std::cout << "unable to init ttf" <<
+		std::endl;
+	}
 }
 
 void engine_shutdown() {
@@ -79,7 +84,7 @@ void game_loop() {
 int main(int argc, char* argv[]) {
 	script_init();
 	load_ini();
-	engine_init();
+	engine_init(); // includes ttf init too
 	vid_init();
 
 	dump_lua();

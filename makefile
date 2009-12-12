@@ -2,7 +2,7 @@
 all: 1 2 load_image.o tiny
 
 tiny : tiny.cpp
-	g++ -o tiny tiny.cpp `sdl-config --libs` -llua5.1
+	g++ -o tiny tiny.cpp `sdl-config --libs` -llua5.1 -lSDL_ttf
 
 load_image.o : load_image.cpp
 	g++ -o load_image.o -c load_image.cpp
