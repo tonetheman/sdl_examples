@@ -18,7 +18,22 @@ void engine_shutdown() {
 }
 
 void vid_init() {
-	screen = SDL_SetVideoMode(400,400,32,SDL_SWSURFACE);
+	int width = 400, height = 400;
+	lua_getglobal(lstate, "video_width");
+	if (!lua_isnumber(lstate,-1)) {
+		std::cout << "warn no video_width" << std::endl;
+	} else {
+		width = (int)lua_tonumber(lstate,-1);
+	}
+
+	lua_getglobal(lstate, "video_height");
+	if (!lua_isnumber(lstate,-1)) {
+		std::cout << "warn no video height" << std::endl;
+	} else {
+		height = lua_tonumber(lstate,-1);
+	}
+
+	screen = SDL_SetVideoMode(width,height,32,SDL_SWSURFACE);
 }
 
 void script_init() {
@@ -30,7 +45,17 @@ void script_shutdown() {
 }
 
 void load_ini() {
-	luaL_loadfile(lstate, "tiny.lua");
+	int result = luaL_loadfile(lstate, "tiny.lua");
+	if (result==0) {
+		std::cout << "loaded tiny fine" << std::endl;
+		lua_pcall(lstate,0,0,0);
+	} else if (LUA_ERRSYNTAX) {
+		std::cout << "ERROR SYNTAX in loading tiny.lua" <<
+		std::endl;
+	} else if (LUA_ERRMEM) {
+		std::cout << "ERROR MEM in loading tiny.lua" <<
+		std::endl;
+	}
 }
 
 int main(int argc, char* argv[]) {
