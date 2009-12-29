@@ -80,18 +80,22 @@ void load_ini() {
 }
 
 void game_loop() {
-	SDL_Event keyevt;
+	SDL_Event evt;
 	bool running = true;
 	while (running) {
-		while(SDL_PollEvent(&keyevt)) {
-			if (keyevt.type == SDL_QUIT) {
+		while(SDL_PollEvent(&evt)) {
+			if (evt.type == SDL_QUIT) {
 				std::cout << "got a quit event" << std::endl;
 				running = false;
 				break;
 			}
-			if (keyevt.type == SDL_KEYDOWN) {
+			if (evt.type == SDL_KEYDOWN) {
 			}
-			if (keyevt.type == SDL_KEYUP) {
+			if (evt.type == SDL_KEYUP) {
+			}
+			if (evt.type == SDL_MOUSEBUTTONUP) {
+				std::cout << evt.button.x << " "
+				<< evt.button.y << std::endl;
 			}
 		}
 	}
