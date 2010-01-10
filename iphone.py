@@ -28,7 +28,8 @@ def generate_launcher_path():
 			pass
 		else:
 			tmp.append((x,y))
-		angle = angle + fidelity	
+		angle = angle + fidelity
+	tmp = tmp[0:-1]	
 	return tmp
 
 launcher_path = generate_launcher_path()
@@ -64,7 +65,7 @@ class Missile(pygame.sprite.Sprite):
 		self.image = pygame.Surface((10,10))
 		pygame.draw.circle(self.image,WHITE,(2,2),4)
 		self.rect = self.image.get_rect()
-		self.max = 20
+		self.max = 100
 	def update(self):
 		self.rect.topleft= (self.x,self.y)
 		self.x = self.x + self.vel_x
@@ -89,7 +90,7 @@ missile_group = pygame.sprite.Group()
 def fire():
 	init_x = launcher.rect.left
 	init_y = launcher.rect.top
-	missile_group.add(Missile(init_x,init_y,1,-3))
+	missile_group.add(Missile(init_x,init_y,0.1,-3))
 
 while 1:
 
