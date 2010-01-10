@@ -29,7 +29,9 @@ def generate_launcher_path():
 		else:
 			tmp.append((x,y))
 		angle = angle + fidelity
-	tmp = tmp[0:-1]	
+	# removed the first element here
+	# i think i was getting a reach around bug :)
+	tmp = tmp[1:]	
 	return tmp
 
 launcher_path = generate_launcher_path()
@@ -107,6 +109,7 @@ while 1:
 				stop_game = True
 				break
 		elif evt.type == pygame.constants.MOUSEBUTTONUP:
+			print evt
 			fire()
 
 	# fill with black
