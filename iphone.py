@@ -89,10 +89,25 @@ stop_game = False
 launcher = Launcher()
 missile_group = pygame.sprite.Group()
 
-def fire():
+def fire(evt):
 	init_x = launcher.rect.left
 	init_y = launcher.rect.top
-	missile_group.add(Missile(init_x,init_y,0.1,-3))
+	# slope towards mouse click
+	print evt
+	x_m = evt.pos[0]
+	y_m = evt.pos[1]
+	print "mouse pos: ", x_m, y_m
+	print "init pos:", init_x,init_y
+	x_s = x_m-init_x
+	y_s = y_m-init_y
+	print "slope:", x_s, y_s
+	if x_s>10:
+		x_s = x_s/2
+		y_s = y_s/2
+	if y_s>10:
+		x_s = x_s/2
+		y_s = y_s/2
+	missile_group.add(Missile(init_x,init_y,x_s,y_s))
 
 while 1:
 
@@ -109,8 +124,7 @@ while 1:
 				stop_game = True
 				break
 		elif evt.type == pygame.constants.MOUSEBUTTONUP:
-			print evt
-			fire()
+			fire(evt)
 
 	# fill with black
 	screen.fill((0,0,0))
