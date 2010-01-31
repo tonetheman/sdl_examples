@@ -90,24 +90,17 @@ launcher = Launcher()
 missile_group = pygame.sprite.Group()
 
 def fire(evt):
-	init_x = launcher.rect.left
-	init_y = launcher.rect.top
 	# slope towards mouse click
 	print evt
 	x_m = evt.pos[0]
 	y_m = evt.pos[1]
 	print "mouse pos: ", x_m, y_m
-	print "init pos:", init_x,init_y
-	x_s = x_m-init_x
-	y_s = y_m-init_y
-	print "slope:", x_s, y_s
-	if x_s>10:
-		x_s = x_s/2
-		y_s = y_s/2
-	if y_s>10:
-		x_s = x_s/2
-		y_s = y_s/2
-	missile_group.add(Missile(init_x,init_y,x_s,y_s))
+
+	print "center of circle",  LAUNCHER_CENTER
+	start_x, start_y = LAUNCHER_CENTER
+	print "run x", x_m-start_x
+	print "run y", y_m-start_y
+	# missile_group.add(Missile(init_x,init_y,x_s,y_s))
 
 while 1:
 
